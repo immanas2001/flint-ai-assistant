@@ -1,0 +1,187 @@
+/* ==========================
+   Flint AI v2 UI
+========================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+    overflow: hidden;
+}
+
+.app {
+    display: flex;
+    height: 100vh;
+}
+
+/* ================= Sidebar ================= */
+
+.sidebar {
+    width: 270px;
+    background: #111827;
+    border-right: 1px solid #1f2937;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.new-chat {
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: .25s;
+}
+
+.new-chat:hover {
+    background: #1d4ed8;
+}
+
+.history {
+    margin-top: 25px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.history-item {
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background: #1e293b;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.history-item:hover {
+    background: #334155;
+}
+
+.history-item.active {
+    background: #2563eb;
+}
+
+/* ================= Main ================= */
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    padding: 18px 30px;
+    border-bottom: 1px solid #1f2937;
+    background: #111827;
+}
+
+.chat-box {
+    flex: 1;
+    overflow-y: auto;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* ================= Messages ================= */
+
+.user,
+.bot {
+    padding: 15px 18px;
+    border-radius: 16px;
+    max-width: 75%;
+    line-height: 1.6;
+    animation: fadeIn .25s ease;
+    white-space: pre-wrap;
+}
+
+.user {
+    align-self: flex-end;
+    background: #2563eb;
+}
+
+.bot {
+    align-self: flex-start;
+    background: #1e293b;
+}
+
+/* ================= Input ================= */
+
+.input-area {
+    display: flex;
+    gap: 12px;
+    padding: 20px;
+    border-top: 1px solid #1f2937;
+    background: #111827;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    background: #1e293b;
+    color: white;
+    font-size: 16px;
+}
+
+.input-area input:focus {
+    outline: none;
+}
+
+.input-area button {
+    width: 60px;
+    border: none;
+    border-radius: 12px;
+    background: #2563eb;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.input-area button:hover {
+    background: #1d4ed8;
+}
+
+/* ================= Scrollbar ================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
+}
+
+/* ================= Animation ================= */
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
