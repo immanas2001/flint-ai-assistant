@@ -2,88 +2,800 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#07080c"
+    >
 
     <title>Flint AI</title>
 
-    <link rel="stylesheet" href="/static/style.css">
+
+    <!-- =====================================================
+         MARKDOWN
+         ===================================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+
+    <!-- =====================================================
+         HIGHLIGHT.JS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css"
+    >
+
+
+    <!-- =====================================================
+         PLOTLY
+         ===================================================== -->
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+
+    <!-- =====================================================
+         FLINT CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
 
 </head>
 
+
 <body>
+
 
 <div class="app">
 
-    <!-- Sidebar -->
+
+    <!-- =====================================================
+         AMBIENT BACKGROUND
+         ===================================================== -->
+
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="ambient ambient-three"></div>
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
 
     <aside class="sidebar">
 
-        <div class="logo">
-            🔥 Flint AI
+
+        <!-- BRAND -->
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                <span>F</span>
+            </div>
+
+            <div class="brand-text">
+
+                <div class="brand-name">
+                    FLINT
+                </div>
+
+                <div class="brand-subtitle">
+                    AI WORKSPACE
+                </div>
+
+            </div>
+
         </div>
 
-        <button class="new-chat" id="new-chat">
-            + New Chat
+
+        <!-- NEW CHAT -->
+
+        <button
+            id="new-chat"
+            class="new-chat"
+            type="button"
+        >
+
+            <span class="new-chat-icon">
+                +
+            </span>
+
+            <span>
+                New conversation
+            </span>
+
+            <span class="shortcut">
+                Ctrl N
+            </span>
+
         </button>
 
-        <div id="chat-history" class="history">
 
-            <div class="history-item active">
-                Chat 1
+        <!-- NAVIGATION -->
+
+        <div class="nav-section">
+
+            <div class="section-label">
+                WORKSPACE
             </div>
 
-        </div>
 
-    </aside>
-
-    <!-- Main -->
-
-    <main class="main">
-
-        <header class="header">
-
-            <h2>Gemini AI</h2>
-
-        </header>
-
-        <div id="chat-box" class="chat-box">
-
-            <div class="bot">
-
-                👋 Hello Manas! I'm Flint AI.
-
-                <br><br>
-
-                Ask me anything.
-
-            </div>
-
-        </div>
-
-        <div class="input-area">
-
-            <input
-                id="message"
-                type="text"
-                placeholder="Message Flint AI..."
+            <button
+                class="nav-item active"
+                type="button"
             >
 
-            <button id="send-btn">
+                <span class="nav-icon">
+                    ◉
+                </span>
 
-                ➤
+                <span>
+                    Conversations
+                </span>
+
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+            >
+
+                <span class="nav-icon">
+                    ◈
+                </span>
+
+                <span>
+                    Datasets
+                </span>
+
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+            >
+
+                <span class="nav-icon">
+                    ◇
+                </span>
+
+                <span>
+                    Documents
+                </span>
 
             </button>
 
         </div>
 
+
+        <!-- CHAT HISTORY -->
+
+        <div class="history-wrapper">
+
+            <div class="history-header">
+
+                <span>
+                    RECENT
+                </span>
+
+                <span class="history-count">
+                    •
+                </span>
+
+            </div>
+
+
+            <div
+                id="chat-history"
+                class="history"
+            >
+            </div>
+
+        </div>
+
+
+        <!-- SIDEBAR BOTTOM -->
+
+        <div class="sidebar-bottom">
+
+
+            <div class="status-card">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>
+                        Flint is online
+                    </strong>
+
+                    <small>
+                        Systems operational
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="sidebar-settings"
+                type="button"
+            >
+
+                <span>
+                    ⚙
+                </span>
+
+                <span>
+                    Settings
+                </span>
+
+            </button>
+
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="main">
+
+
+        <!-- =================================================
+             HEADER
+             ================================================= -->
+
+        <header class="header">
+
+
+            <div class="header-left">
+
+
+                <button
+                    class="mobile-menu"
+                    type="button"
+                    aria-label="Open menu"
+                >
+                    ☰
+                </button>
+
+
+                <div class="conversation-info">
+
+                    <div
+                        id="chat-title"
+                        class="chat-title"
+                    >
+                        New conversation
+                    </div>
+
+
+                    <div class="conversation-status">
+
+                        <span class="mini-status"></span>
+
+                        <span>
+                            Flint AI
+                        </span>
+
+                        <span class="status-separator">
+                            •
+                        </span>
+
+                        <span>
+                            Ready
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-actions">
+
+
+                <button
+                    class="header-button"
+                    type="button"
+                    title="Search"
+                >
+                    ⌕
+                </button>
+
+
+                <button
+                    class="header-button"
+                    type="button"
+                    title="Settings"
+                >
+                    ⚙
+                </button>
+
+
+                <div class="profile-button">
+                    F
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             CHAT BOX
+             ================================================= -->
+
+        <div
+            id="chat-box"
+            class="chat-box"
+        >
+
+
+            <!-- =================================================
+                 WELCOME SCREEN
+                 ================================================= -->
+
+            <div class="welcome-screen">
+
+
+                <div class="welcome-glow"></div>
+
+
+                <div class="welcome-logo">
+
+                    <div class="welcome-logo-inner">
+                        F
+                    </div>
+
+                </div>
+
+
+                <div class="welcome-eyebrow">
+                    INTELLIGENT WORKSPACE
+                </div>
+
+
+                <h1>
+                    What can
+                    <span>Flint</span>
+                    help you solve?
+                </h1>
+
+
+                <p class="welcome-description">
+
+                    Analyze data, understand documents,
+                    create visualizations, and explore
+                    ideas with your AI workspace.
+
+                </p>
+
+
+
+                <!-- =================================================
+                     SUGGESTIONS
+                     ================================================= -->
+
+                <div class="suggestion-grid">
+
+
+                    <button
+                        class="suggestion-card"
+                        type="button"
+                        data-prompt="Analyze this dataset and give me the key insights"
+                    >
+
+                        <div class="suggestion-icon">
+                            ◈
+                        </div>
+
+                        <div class="suggestion-content">
+
+                            <strong>
+                                Analyze data
+                            </strong>
+
+                            <span>
+                                Find patterns and insights
+                            </span>
+
+                        </div>
+
+                        <span class="suggestion-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+
+                    <button
+                        class="suggestion-card"
+                        type="button"
+                        data-prompt="Create a useful visualization for this dataset"
+                    >
+
+                        <div class="suggestion-icon">
+                            ↗
+                        </div>
+
+                        <div class="suggestion-content">
+
+                            <strong>
+                                Visualize
+                            </strong>
+
+                            <span>
+                                Turn data into clear charts
+                            </span>
+
+                        </div>
+
+                        <span class="suggestion-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+
+                    <button
+                        class="suggestion-card"
+                        type="button"
+                        data-prompt="Give me important insights from this dataset"
+                    >
+
+                        <div class="suggestion-icon">
+                            ✦
+                        </div>
+
+                        <div class="suggestion-content">
+
+                            <strong>
+                                Generate insights
+                            </strong>
+
+                            <span>
+                                Discover what's important
+                            </span>
+
+                        </div>
+
+                        <span class="suggestion-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+
+                    <button
+                        class="suggestion-card"
+                        type="button"
+                        data-prompt="Summarize the uploaded document"
+                    >
+
+                        <div class="suggestion-icon">
+                            ◇
+                        </div>
+
+                        <div class="suggestion-content">
+
+                            <strong>
+                                Ask documents
+                            </strong>
+
+                            <span>
+                                Search and understand files
+                            </span>
+
+                        </div>
+
+                        <span class="suggestion-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="welcome-hint">
+
+                    <span class="hint-key">
+                        Ctrl K
+                    </span>
+
+                    <span>
+                        Quick actions
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             COMPOSER
+             ================================================= -->
+
+        <div class="composer-area">
+
+
+            <div class="composer-shell">
+
+
+                <!-- ATTACHMENT -->
+
+                <button
+                    id="upload-btn"
+                    class="composer-button attachment-button"
+                    type="button"
+                    title="Upload file"
+                >
+
+                    <span>
+                        +
+                    </span>
+
+                </button>
+
+
+
+                <!-- INPUT -->
+
+                <div class="input-wrapper">
+
+
+                    <input
+                        id="message"
+                        class="message-input"
+                        type="text"
+                        placeholder="Ask Flint anything..."
+                        autocomplete="off"
+                        spellcheck="true"
+                    >
+
+
+                </div>
+
+
+
+                <!-- SEND -->
+
+                <button
+                    id="send-btn"
+                    class="send-button"
+                    type="button"
+                    title="Send message"
+                >
+
+                    <span>
+                        ↑
+                    </span>
+
+                </button>
+
+
+
+                <!-- FILE INPUT -->
+
+                <input
+                    type="file"
+                    id="fileInput"
+                    accept=".pdf,.txt,.csv,.xlsx,.xls,.docx,.png,.jpg,.jpeg"
+                    hidden
+                >
+
+
+            </div>
+
+
+            <div class="composer-footer">
+
+                <span>
+                    Flint can make mistakes. Verify important information.
+                </span>
+
+                <span class="footer-right">
+                    AI Workspace
+                </span>
+
+            </div>
+
+
+        </div>
+
+
     </main>
+
 
 </div>
 
+
+
+<!-- =========================================================
+     COMMAND PALETTE
+     ========================================================= -->
+
+<div
+    id="command-palette"
+    class="command-overlay"
+    hidden
+>
+
+
+    <div class="command-panel">
+
+
+        <div class="command-search">
+
+            <span>
+                ⌕
+            </span>
+
+
+            <input
+                id="command-input"
+                type="text"
+                placeholder="Search Flint..."
+                autocomplete="off"
+            >
+
+
+            <kbd>
+                ESC
+            </kbd>
+
+        </div>
+
+
+
+  
+        <div class="command-items">
+
+
+            <button
+                class="command-item"
+                type="button"
+            >
+
+                <span class="command-icon">
+                    +
+                </span>
+
+                <span>
+                    New conversation
+                </span>
+
+                <kbd>
+                    Ctrl N
+                </kbd>
+
+            </button>
+
+
+            <button
+                class="command-item"
+                type="button"
+            >
+
+                <span class="command-icon">
+                    ◈
+                </span>
+
+                <span>
+                    Analyze dataset
+                </span>
+
+            </button>
+
+
+            <button
+                class="command-item"
+                type="button"
+            >
+
+                <span class="command-icon">
+                    ↗
+                </span>
+
+                <span>
+                    Create visualization
+                </span>
+
+            </button>
+
+
+            <button
+                class="command-item"
+                type="button"
+            >
+
+                <span class="command-icon">
+                    ✦
+                </span>
+
+                <span>
+                    Generate insights
+                </span>
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     TOAST
+     ========================================================= -->
+
+<div
+    id="flint-toast"
+    class="toast"
+>
+
+    <span class="toast-icon">
+        ✓
+    </span>
+
+    <span class="toast-message">
+        Ready
+    </span>
+
+</div>
+
+
+
+<!-- =========================================================
+     HIGHLIGHT.JS
+     ========================================================= -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+
+
+
+<!-- =========================================================
+     YOUR EXISTING FLINT SCRIPT
+     ========================================================= -->
+
 <script src="/static/script.js"></script>
+
+
+
 
 </body>
 

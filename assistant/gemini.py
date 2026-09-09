@@ -1,33 +1,64 @@
 from google import genai
-from config import GEMINI_API_KEY
 
-client = genai.Client(api_key=GEMINI_API_KEY)
-
-MODELS = [
-    "models/gemini-3.5-flash",
-    "models/gemini-2.0-flash",
-    "models/gemini-flash-latest",
-]
+from config import GEMINI_API_KEY, GEMINI_MODEL
 
 
-def generate_response(prompt: str):
+# ==========================================
+# Gemini Client
+# ==========================================
 
-    last_error = None
+client = genai.Client(
+    api_key=GEMINI_API_KEY
+)
 
-    for model in MODELS:
 
-        try:
+# ==========================================
+# Normal Response
+# ==========================================
 
-            response = client.models.generate_content(
-                model=model,
-                contents=prompt,
-            )
+def generate_response(prompt: str) -> str:
+    """
+    Generate a complete Gemini response.
 
-            return response.text
+    Used by the existing /chat endpoint.
+    """
 
-        except Exception as e:
+    try:
+        response = client.models.generate_content(
+            model=GEMINI_MODEL,
+            contents=prompt,
+        )
 
-            last_error = e
-            continue
+        return response.text or ""
 
-    return f"❌ Gemini Error:\n{last_error}"
+    except Exception as e:
+        return f"Gemini Error: {str(e)}"
+
+
+# ==========================================
+# Streaming Response
+# ==========================================
+
+def generate_stream(prompt: str):
+    """
+    Stream Gemini response chunks.
+
+    Each yielded value is a piece of the
+    final AI response.
+    """
+
+    try:
+
+        response_stream = client.models.generate_content_stream(
+            model=GEMINI_MODEL,
+            contents=prompt,
+        )
+
+        for chunk in response_stream:
+
+            if hasattr(chunk, "text") and chunk.text:
+                yield chunk.text
+
+    except Exception as e:
+
+        yield f"\n\nGemini Error: {str(e)}"
