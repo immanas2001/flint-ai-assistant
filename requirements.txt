@@ -19,4 +19,5 @@ chromadb
 markdown==3.8.2
 Pygments==2.19.2
 
-requests>=2.33.0,<3.0.0`r`nplotly>=6.0,<7.0
+requests>=2.33.0,<3.0.0
+plotly>=6.0,<7.0
