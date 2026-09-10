@@ -191,6 +191,28 @@ def create_chat(
 
         conn.close()
 
+def get_chat(chat_id: int) -> dict | None:
+    """
+    Return a chat by ID, or None if it does not exist.
+    """
+
+    conn = get_connection()
+
+    try:
+        row = conn.execute(
+            """
+            SELECT *
+            FROM chats
+            WHERE id=?
+            """,
+            (chat_id,)
+        ).fetchone()
+
+        return dict(row) if row else None
+
+    finally:
+        conn.close()
+
 
 def get_all_chats() -> list[dict]:
     """

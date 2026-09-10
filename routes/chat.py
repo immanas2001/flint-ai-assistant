@@ -47,6 +47,7 @@ from database.database import (
     save_message,
     delete_chat,
     rename_chat,
+    get_chat,
 )
 
 
@@ -255,10 +256,17 @@ def prepare_chat(
 ):
     """
     Return a valid chat ID and whether a new chat was created.
+
+    If the frontend sends a stale/non-existent chat ID,
+    automatically create a fresh chat instead of causing
+    a SQLite foreign-key error.
     """
 
     if chat_id is not None:
-        return chat_id, False
+        existing_chat = get_chat(chat_id)
+
+        if existing_chat:
+            return chat_id, False
 
     return create_chat(), True
 
